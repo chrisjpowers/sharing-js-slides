@@ -1,0 +1,27 @@
+{
+  "author": "Chris Powers <chrisjpowers@gmail.com> (http://chrisjpowers.com)",
+  "name": "sly",
+  "description": "Slide show",
+  "version": "0.0.0-8",
+  "dependencies": {
+    "coffee-script": "*",
+    "express": "2.x.x",
+    "feat": "*",
+    "air-drop": ">= 0.1.3",
+    "jade": "*",
+    "now": "*"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "0.6.x"
+  },
+  "domains": [
+    "fluent2012.chrisjpowers.com",
+    "thatconf.chrisjpowers.com"
+  ],
+  "subdomain": "chrisjpowers-fluent2012"
+}

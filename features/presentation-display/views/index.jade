@@ -1,0 +1,19 @@
+!!!
+html(lang="en")
+  head
+    title= title
+    script(type='text/javascript', src="/nowjs/now.js")
+    script(type='text/javascript', src="/air-drop/main.js")
+    link(rel="stylesheet", href="/css/presentation-display.css")
+  body
+    #impress.impress-not-supported
+      .fallback-message
+        p Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.
+        p For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.
+
+      each slide in slides
+        div(id=slide.id, class=slide.classes, data-x=slide["data-x"], data-y=slide["data-y"], data-z=slide["data-z"], data-rotate=slide["data-rotate"], data-rotate-x=slide["data-rotate-x"], data-rotate-y=slide["data-rotate-y"], data-scale=slide["data-rotate-z"])
+          !{slide.content}
+
+    ul#toolbar
+      li#sync-toggle In Sync

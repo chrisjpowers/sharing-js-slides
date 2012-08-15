@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+  <title>Sharing JS Code Between Server and Client</title>
+  <script type="text/javascript" src="/nowjs/now.js"></script>
+  <script type="text/javascript" src="/main.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Londrina+Solid' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/presentation-display.css"/>
+</head>
+<body>
+  <div id="impress" class="impress-not-supported">
+    <div class="fallback-message">
+      <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+      <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+    </div>
+
+    <div id="title" class="step slide" data-x="-1000" data-y="-1500">
+      <h1>Sharing Your Code</h1>
+      <p>between your</p>
+      <h2>Server and Client</h2>
+      <p>
+        <span class="name">Chris Powers</span><br/>
+        <a href="http://twitter.com/chrisjpowers" target="_blank">@chrisjpowers</a><br/>
+        <a href="http://chrisjpowers.com" target="_blank">http://chrisjpowers.com</a><br/>
+      </p>
+    </div>
+
+    <div class="step slide" data-x="-1000" data-y="-1500" data-rotate="20">
+      <h1>Follow Along!</h1>
+      <p><a href="http://thatconf.chrisjpowers.com">http://thatconf.chrisjpowers.com</a></p>
+      <p>Use left/right arrows to go at your own pace.</p>
+    </div>
+
+    <div class="step slide cover title" data-x="5300" data-y="-500" data-rotate="140" data-z="200">
+      <h1>Code Sharing</h1>
+      <p>Is it the holy grail?</p>
+    </div>
+
+    <div class="step slide cover title" data-x="5300" data-y="-500" data-rotate="120" data-z="200">
+      <h1>If you think it is...</h1>
+      <p>This talk is for you!</p>
+    </div>
+
+    <div class="step slide cover" data-x="5300" data-y="-500" data-rotate="100" data-z="200">
+      <h1>On the Docket</h1>
+      <ul>
+        <li>My experiences with sharing code</li>
+        <li>Why sexy isn't always sexy</li>
+        <li>Building blocks for code sharing</li>
+      </ul>
+    </div>
+      
+    <div class="step slide cover" data-x="4200" data-y="-500" data-rotate="140" data-z="200">
+      <h1>Business Logic on the Server</h1>
+      <ul>
+        <li>Provide user and data authentication</li>
+        <li>Serve Google, REST API, non-JS clients</li>
+        <li>Server -&gt; Server data requests</li>
+        <li>Background processing</li>
+        <li>Simply unavoidable</li>
+      </ul>
+    </div>
+
+    <div class="step slide" data-x="4200" data-y="-500" data-rotate="160" data-z="100">
+      <h1>Business Logic on the Client</h1>
+      <ul>
+        <li>Can be performant</li>
+        <li>Fewer round trips to the server</li>
+        <li>Reduce size of data from server</li>
+        <li>Power the views and workflows</li>
+        <li>Offline functionality</li>
+      </ul>
+    </div>
+
+    <div class="step slide" data-x="3400" data-y="-500" data-rotate="180" data-z="0">
+      <h1>Why do we want to share?</h1>
+      <ul>
+        <li>DRY the code</li>
+        <li>Reduce context switching</li>
+        <li>Common interfaces</li>
+        <li>Fat Client + Ephemeral Views</li>
+      </ul>
+    </div>
+
+    <div class="step slide" data-x="2600" data-y="-500" data-rotate="200" data-z="100">
+      <h1>Drumkit.js</h1>
+      <p><img src="/img/drumkit.gif" width="425" height="400" /></p>
+      <p><a href="http://drumkitjs.com" target="_blank">http://drumkitjs.com</a></p>
+    </div>
+
+    <div class="step slide cover" data-x="-100" data-y="-1500" data-rotate="20" data-z="100">
+      <h1>Drumkit Features</h1>
+      <ul>
+        <li>Shared Models</li>
+        <li>Shared Views</li>
+        <li>Shared Routing Actions</li>
+        <li>Asset Packaging</li>
+        <li>Plugin System</li>
+      </ul>
+    </div>
+
+    <div class="step slide title" data-x="-100" data-y="-1500" data-rotate="40" data-z="100">
+      <h1>Ultimately Abandoned</h1>
+      <p>In favor of Meteor, Derby, etc.</p>
+    </div>
+
+    <div class="step slide cover" data-x="800" data-y="-1500" data-rotate="40" data-z="200">
+      <h1>Code Challenges of Sharing</h1>
+      <ul>
+        <li>Code can be loaded in both environments</li>
+        <li>Elegantly separate client/server/shared code</li>
+        <li>Get code to browser</li>
+      </ul>
+    </div>
+
+    <div class="step slide" data-x="800" data-y="-1500" data-rotate="60" data-z="200">
+      <h1>The Real Challenges of Sharing</h1>
+      <ul>
+        <li>Simplicity must exceed complexity</li>
+        <li>Clarity must be maintined</li>
+        <li>Abstractions must hold up over time</li>
+      </ul>
+    </div>
+
+    <div class="step slide cover" data-x="2600" data-y="-1500" data-rotate="0" data-z="0">
+      <h1>Fluent</h1>
+      <img src="/img/definition.png" width="800" /> 
+    </div>
+
+    <div class="step slide cover" data-x="2600" data-y="-1500" data-rotate="20" data-z="0">
+      <h1>A Fluent Programmer</h1>
+      <ul>
+        <li>Understands the language</li>
+        <li>Clearly expresses intent</li>
+        <li>Understood by other humans</li>
+      </ul>
+    </div>
+
+    <div class="step slide cover title" data-x="2600" data-y="-1500" data-rotate="40" data-z="0">
+      <h1>The Turing Test</h1>
+      <p>Separating the computers from the men.</p>
+    </div>
+
+    <div class="step slide cover title" data-x="2600" data-y="-1500" data-rotate="60" data-z="0">
+      <h1>Chinese Room</h1>
+      <p>A thought experiment.</p>
+    </div>
+
+    <div class="step slide cover title" data-x="2600" data-y="-1500" data-rotate="80" data-z="0">
+      <p>Every time we use an abstraction we don't understand, we put ourselves in a <br/>Chinese Room.</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-1500" data-rotate="0" data-z="0">
+      <h1>We've Been Here Before</h1>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-1500" data-rotate="20" data-z="0">
+      <h1>Ruby on Rails</h1>
+      <p>Build a blog in 15 minutes!</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-1500" data-rotate="40" data-z="0">
+      <h1>That is <em>sooooooo</em> sexy...</h1>
+      <p>...but I don't know what I'm doing.</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-1500" data-rotate="60" data-z="0">
+      <p>Over time, the <em>magic framework</em></p>
+      <h1>stopped being an asset</h1>
+      <p>and started being a liability</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-2500" data-rotate="60" data-z="0">
+      <p>So the question is...</p>
+      <h1>What are we optimizing for?</h1>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-2500" data-rotate="80" data-z="0">
+      <p>Speed of development</p>
+      <p>Ease of entry</p>
+      <p>Smaller/DRYer code</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-2500" data-rotate="100" data-z="0">
+      <h1>"Optimize for minimizing the cost of change."</h1>
+      <p>- Corey Haines, SCNA 2011</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-3500" data-rotate="120" data-z="0">
+      <h1>What is DRY?</h1>
+      <p>(it's not what you think)</p>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-3500" data-rotate="100" data-z="0">
+      <p>DRY is about removing duplication of</p>
+      <h1>KNOWLEDGE</h1>
+      <p>not code</p>
+    </div>
+
+    <div class="step slide" data-x="3600" data-y="-3500" data-rotate="80" data-z="0">
+      <h1>A Trivial Example</h1>
+      <pre>
+presenter =
+  buyButtonText: ->
+    "Buy Now!"
+  getawaysBuyButtonText: ->
+    "Buy Now!"
+      </pre>
+    </div>
+
+    <div class="step slide" data-x="3600" data-y="-3500" data-rotate="80" data-z="0">
+      <h1>Using a "Constant"</h1>
+      <pre>
+buttonText = "Buy Now!"
+presenter =
+  buyButtonText: ->
+    buttonText
+  getawaysBuyButtonText: ->
+    buttonText
+      </pre>
+    </div>
+
+    <div class="step slide" data-x="3600" data-y="-3500" data-rotate="80" data-z="0">
+      <h1>Sharing the Method</h1>
+      <pre>
+presenter =
+  buyButtonText: ->
+    "Buy Now!"
+  getawaysBuyButtonText: ->
+    this.buyButtonText()
+      </pre>
+    </div>
+
+    <div class="step slide" data-x="3600" data-y="-3500" data-rotate="80" data-z="0">
+      <h1>Remove Extraneous Method</h1>
+      <pre>
+presenter =
+  buyButtonText: ->
+    "Buy Now!"
+  # don't need getawaysBuyButtonText
+  # change getaways view to use buyButtonText
+      </pre>
+    </div>
+
+    <div class="step slide title" data-x="3600" data-y="-3500" data-rotate="60" data-z="0">
+      <h1>Which of these refactorings best expresses the KNOWLEDGE in the system?</h1>
+      <p>Which has the higher cost of change?</p>
+    </div>
+
+    <div class="step slide title" data-x="4600" data-y="-3500" data-rotate="40" data-z="0">
+      <p>Ultimately, sharing code is an</p>
+      <h1><em>optimization</em></h1>
+      <p>not a <em>foundation</em></p>
+    </div>
+
+    <div class="step slide title" data-x="4600" data-y="-3500" data-rotate="20" data-z="0">
+      <p>All it takes is a</p>
+      <h1>single deviation</h1>
+      <p>for shared code to become "unshared"</p>
+    </div>
+
+    <div class="step slide title" data-x="2700" data-y="-2500" data-rotate="0" data-z="0">
+      <p>Still want to share code?</p>
+      <h1>Good!</h1>
+    </div>
+
+    <div class="step slide cover" data-x="2700" data-y="-2500" data-rotate="0" data-z="0">
+      <h1>Code Challenges of Sharing</h1>
+      <ul>
+        <li>Code can be loaded in both environments</li>
+        <li>Elegantly separate client/server/shared code</li>
+        <li>Get code to browser</li>
+      </ul>
+    </div>
+    <!--
+    <div class="step slide" data-x="2600" data-y="-1500" data-rotate="0" data-z="0">
+      <h1>I wonder...</h1>
+      <h1>What site architectures <strong>DON'T</strong> need to share code?</h1>
+      <img src="/img/blueprint.jpg" />
+    </div>
+
+    <div class="step slide cover" data-x="3400" data-y="-1500" data-rotate="20" data-z="100">
+      <h1>Server-Centric (Rails 1,2)</h1>
+      <img src="/img/ajax-rails.jpg" />
+    </div>
+
+    <div class="step slide" data-x="3400" data-y="-1500" data-rotate="20" data-z="100">
+      <h1>Problems with Server-Centric</h1>
+      <ul>
+        <li>Server intensive</li>
+        <li>Slow (full page loads)</li>
+        <li>Generated JS is brittle</li>
+        <li>Difficult to test</li>
+        <li>No offline capabilities</li>
+      </ul>
+    </div>
+
+    <div class="step slide cover" data-x="4200" data-y="-1500" data-rotate="40" data-z="200">
+      <h1>Browser Stand-Alone</h1>
+      <p><a href="http://tryjasmine.com" target="_blank">http://tryjasmine.com</a></p>
+      <img src="/img/try-jasmine.png" height="500" />
+    </div>
+
+    <div class="step slide" data-x="4200" data-y="-1500" data-rotate="40" data-z="200">
+      <h1>Problems with Browser Stand-Alone</h1>
+      <ul>
+        <li>Persistence tied to a single browser</li>
+        <li>Limited functionality</li>
+      </ul>
+    </div>
+
+    <div class="step slide cover" data-x="5000" data-y="-1500" data-rotate="60" data-z="300">
+      <h1>API Powered / Couchapp</h1>
+      <img src="/img/couchapp.png" />
+    </div>
+
+    <div class="step slide" data-x="5000" data-y="-1500" data-rotate="60" data-z="300">
+      <h1>Problems with API Powered and Couchapps</h1>
+      <ul>
+        <li>Security issues, authentication</li>
+        <li>Likely Read-Only</li>
+        <li>Limited functionality</li>
+      </ul>
+    </div>
+    -->
+
+
+
+    <div class="step slide" data-x="1700" data-y="-1500" data-rotate="20" data-z="100">
+      <h1>Building Client Source</h1>
+      <ol>
+        <li>File Selection</li>
+        <li>Dependencies &amp; Order</li>
+        <li>Manipulation &amp; Compilation</li>
+        <li>Concatenation</li>
+        <li>Minimization</li>
+        <li>Delivery</li>
+        <li>Dev/Prod Concerns</li>
+      </ol>
+    </div>
+
+    <div class="step slide cover" data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Big Namespace</h1>
+      <p>Drumkit Implementation</p>
+      <pre>
+dk.plugin "helloWorld", ->
+  mod = {}
+  mod.hello = -> "Hello World!"
+  mod
+
+dk.helloWorld.hello() #=> "Hello World!"
+      </pre>
+    </div>
+
+    <div class="step slide cover" cover data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Big Namespace</h1>
+      <p>SocketStream Implementation</p>
+      <img src="/img/ss-dirs.png" />
+    </div>
+
+    <div class="step slide cover" cover data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Big Namespace</h1>
+      <p>SocketStream Implementation</p>
+      <pre>
+# in app/shared/demo.coffee
+exports.helloWorld = -> "Hello World!"
+
+# elsewhere
+SS.app.shared.demo.helloWorld() 
+#=> "Hello World!"
+      </pre>
+    </div>
+
+    <div class="step slide cover" cover data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Browserify</h1>
+      <img src="/img/browserify.png" height="300" />
+      <pre>
+browserify = require "browserify"
+bundle = browserify "lib/my-module.js"
+app.use bundle
+      </pre>
+    </div>
+
+    <div class="step slide cover" cover data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>browser-require</h1>
+      <pre>
+require.load([
+  'foo.js',
+  'bar/baz.js',
+  {id: 'user-agent', 
+   url:'http://internets.com/lib/ua.js'}
+], function (err) {
+  if (err) throw err;
+  var foo = require('foo'),
+      baz = require('bar/baz'),
+      userAgent = require('user-agent');
+});
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Invasive Procedures</h1>
+      <img src="/img/code-surgeon.png" />
+      <pre>
+// original source
+function funcA() { return 'A'; }
+function funcB() { return 'B'; }
+var variable1 = 100 + 100;
+var variable2 = 100 + 100;
+function funcC() { return 'C'; }
+      </pre>
+    </div>
+
+
+    <div class="step slide cover" data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Invasive Procedures</h1>
+      <pre>
+var CS = require('codesurgeon').Codesurgeon;
+var surgeon = new CS;    
+
+surgeon
+.read('/src.js')                
+.extract(                       
+  'funcB',
+  'variable2'
+)
+.write(__dirname + '/dest.js');
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>Invasive Procedures</h1>
+      <img src="/img/code-surgeon.png" />
+      <pre>
+// resulting code
+//
+// Generated on Thu Sep 29 2011 12:29:42
+// Version 0.1.6
+//
+
+function funcB() { return 'B'; }
+var variable2 = 100 + 100;
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <pre>
+# original code
+onServer ->
+  fs.readFile("passwords.txt");
+
+onClient ->
+  jQuery(".something").hide();
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <pre>
+# server code
+global.onServer = (f) -> f()
+global.onClient = (f) -> #noop
+
+# client code
+onServer = (f) -> #noop
+onClient = (f) -> f()
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <img src="/img/burrito.png" />
+      <p>Burrito to the rescue...</p>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <pre>
+burrito = require('burrito')
+code = 'f() && g(h())'
+
+burrito code, (node) ->
+  if node.name === 'call'
+    node.wrap 'q(%s)'
+
+# q(f()) && q(g(q(h())));
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <pre>
+sanitize = (data) ->
+  burrito data.toString(), (node) ->
+    if node.name == "call" && 
+    node.start.value == "onServer"
+      node.wrap ""
+
+app.get "/source.js", (req, res) ->
+  fs.readFile "source.js", (err, data) ->
+    res.write sanitize(data)
+    res.end()
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="1000" data-y="-500" data-rotate="200" data-z="300">
+      <h1>Conditional Blocks</h1>
+      <pre>
+# resulting code
+onClient ->
+  jQuery(".something").hide();
+      </pre>
+    </div>
+
+
+    <div class="step slide cover" data-x="1000" data-y="1500" data-rotate="0" data-z="0">
+      <h1>Minify/Obfuscate</h1>
+      <p>Uglify.js</p>
+      <pre>
+jsp = require("uglify-js").parser
+pro = require("uglify-js").uglify
+
+orig_code = "... JS code here"
+ast = jsp.parse(orig_code)
+ast = pro.ast_mangle(ast)
+ast = pro.ast_squeeze(ast)
+final_code = pro.gen_code(ast)
+      </pre>
+    </div>
+      
+    <div class="step slide cover" cover data-x="1800" data-y="-500" data-rotate="220" data-z="200">
+      <h1>AirDrop</h1>
+      <pre>
+drop = AirDrop("/js/my-package.js")
+  .include("public/js/jquery.js")
+  .require("lib/shared/**/*.coffee")
+  .include("public/js/**/*.coffee")
+  .package()
+  .minimize()
+  .cache()
+  .stripFunction("onServer")
+app.use drop
+      </pre>
+      <p><a href="http://github.com/chrisjpowers/air-drop">http://github.com/chrisjpowers/air-drop</a></p>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="1500" data-rotate="20" data-z="100">
+      <h1>The code is in the browser...<br />soooooo......<br />now what?</h1>
+    </div>
+
+    <div class="step slide cover" data-x="3000" data-y="1500" data-rotate="40" data-z="100">
+      <h1>Browser Request Cycle</h1>
+      <ol>
+        <li>View Interaction (or URL)</li>
+        <li>Request Modeling</li>
+        <li>Data Modeling</li>
+        <li>Authentication</li>
+        <li>Guards/Validation</li>
+        <li>Request Serialization</li>
+        <li>Deliver Request via Transport</li>
+      </ol>
+    </div>
+
+    <div class="step slide cover" data-x="3000" data-y="1500" data-rotate="40" data-z="100">
+      <h1>Server Request Cycle</h1>
+      <ol>
+        <li>Get Request (Transport,URL)</li>
+        <li>Request Deserialization, Model</li>
+        <li>Data Modeling</li>
+        <li>Authentication</li>
+        <li>Guards/Validation</li>
+        <li>Build/Serialize Response</li>
+        <li>Deliver Response via Transport</li>
+      </ol>
+    </div>
+
+    <div class="step slide cover" data-x="3000" data-y="1500" data-rotate="40" data-z="100">
+      <h1>Shared Code Opportunities</h1>
+      <ol>
+        <li>Transport Interface</li>
+        <li>Routing URLs to Requests</li>
+        <li>Request Serialization</li>
+        <li>Modeling Requests</li>
+        <li>Modeling Data Objects</li>
+        <li>Authentication/Validation</li>
+        <li>View Rendering</li>
+      </ol>
+    </div>
+
+    <div class="step slide cover" data-x="4000" data-y="1500" data-rotate="60" data-z="100">
+      <h1>Transport &amp; Serialization</h1>
+      <img src="/img/now.png" height="100" />
+    </div>
+
+    <div class="step slide cover" data-x="4000" data-y="1500" data-rotate="60" data-z="100">
+      <h1>Transport &amp; Serialization</h1>
+      <pre>
+# client
+sendRequest = (req, cb) ->
+  reqData = Request.serialize req
+  now.doRequest(reqData, (data) ->
+    res = Response.deserialize data
+    cb res
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="4000" data-y="1500" data-rotate="60" data-z="100">
+      <h1>Transport &amp; Serialization</h1>
+      <pre>
+# server
+everyone.now.doRequest = (data, cb) ->
+  req = Request.deserialize data
+  req.run (res) ->
+    resData = Response.serialize res
+    cb resData
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="4000" data-y="1500" data-rotate="40" data-z="100">
+      <h1>CouchDB / PouchDB</h1>
+      <img src="/img/couchdb-replication.jpg" height="500px" />
+    </div>
+
+    <div class="step slide cover" data-x="5000" data-y="1500" data-rotate="80" data-z="200">
+      <h1>Shared URL Routing</h1>
+      <p><img src="/img/flatiron.png" height="50" /> Director</p>
+      <pre>
+router = Router(
+'/authors':
+  on: ->
+    Request.serialize(
+      name: "showAuthors").run()
+  '/:id':
+    on: (id) ->
+      Request.serialize(
+        name: "showAuthor", id: id).run();
+)
+      </pre>      
+    </div>
+
+    <div class="step slide cover" data-x="6000" data-y="1500" data-rotate="100" data-z="200">
+      <h1>Data Modeling</h1>
+      <p><img src="/img/flatiron.png" height="50" /> Resourceful</p>
+      <pre>
+Creature = resourceful.define 'creature'
+
+Creature.property 'diet'
+Creature.property 'vertebrate', Boolean
+Creature.property 'belly', Array
+
+Creature.prototype.feed = (food) ->
+  this.belly.push food
+      </pre>
+  </div>
+
+    <div class="step slide cover" data-x="6000" data-y="1500" data-rotate="100" data-z="200">
+      <h1>Data Modeling</h1>
+      <p><img src="/img/flatiron.png" height="50" /> Resourceful</p>
+      <pre>
+wolf = new Creature(
+  diet: 'carnivore',
+  vertebrate: true
+);
+
+wolf.feed 'squirrel'
+console.log wolf.belly #=> ['squirrel']
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="6000" data-y="1500" data-rotate="100" data-z="200">
+      <h1>Data Model Validation</h1>
+      <p><img src="/img/flatiron.png" height="50" /> Resourceful</p>
+      <pre>
+Creature.number 'legs',
+  required: true,
+  minimum: 0,
+  maximum: 8,
+  assert: (val) ->
+    val % 2 == 0
+      </pre>
+    </div>
+
+    <div class="step slide cover" data-x="7000" data-y="1500" data-rotate="100" data-z="200">
+      <h1>View Templates</h1>
+      <ul>
+        <li><strong>Good:</strong> Mustache, Plates, Facile</li>
+        <li><strong>Okay:</strong> EJS, ECO, Handlebars</li>
+        <li><strong>Lousy:</strong> Jade, Ember, KO</li>
+      </ul>
+      <p><em>PS: Don't write your own!</em></p>
+    </div>
+
+    <div class="step slide cover" data-x="8000" data-y="1500" data-rotate="120" data-z="200">
+      <h1>So Much Left...</h1>
+      <h1>... but time evades us.</h1>
+      <h1>Questions?</h1>
+      <p>(Now or Later)</p>
+      <p>@chrisjpowers</p>
+    </div>
+  </div>
+  
+  <ul id="toolbar">
+    <li id="sync-toggle">In Sync</li>
+  </ul>
+</body>
+</html>
